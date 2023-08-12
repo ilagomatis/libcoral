@@ -60,8 +60,9 @@ cc_binary(
 )
 
 cc_binary(
-    name = "classify_image",
-    srcs = ["classify_image.cc"],
+    name = "classify",
+    srcs = ["classify_image.h", "classify_image.cc"],
+    linkshared = 1,
     deps = [
         ":file_utils",
         "//coral:tflite_utils",
