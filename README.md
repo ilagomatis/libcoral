@@ -91,3 +91,11 @@ Linux on other operating systems without complicated setup, e.g.,
 make DOCKER_IMAGE=debian:buster DOCKER_CPUS="k8 armv7a aarch64" DOCKER_TARGETS=tests docker-build
 make DOCKER_IMAGE=ubuntu:18.04 DOCKER_CPUS="k8 armv7a aarch64" DOCKER_TARGETS=tests docker-build
 ```
+
+### libclassify.so
+
+build libclassify using 
+
+```
+make DOCKER_IMAGE=debian:buster DOCKER_CPUS="aarch64" DOCKER_TARGETS=examples docker-build
+```
