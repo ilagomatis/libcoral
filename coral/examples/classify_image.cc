@@ -21,7 +21,13 @@ namespace classify {
       float input_mean,
       float input_std
       ){
-
+    /*std::cout<<std::endl;
+    std::cout<<"Model_path: "<<model_path<<std::endl;
+    std::cout<<"Image_path: "<<image_path<<std::endl;
+    std::cout<<"Labels_path: "<<labels_path<<std::endl;
+    std::cout<<"input_mean: "<<input_mean<<std::endl;
+    std::cout<<"input_std: "<<input_std<<std::endl;
+    */
     // Load the model.
     const auto model = coral::LoadModelOrDie(model_path);
 
@@ -85,7 +91,7 @@ namespace classify {
       out = out + std::to_string(result.score);
       out = out + "\n";
     }
-    
+    //std::cout<<"C++ output:"<<std::endl<<out<<std::endl;
     return out;
     
     

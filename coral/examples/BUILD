@@ -59,11 +59,29 @@ cc_binary(
     ],
 )
 
+cc_library(
+    name = "classify_cc",
+    srcs = ["classify_image.cc"],
+    hdrs = ["classify_image.h"],
+    deps = [
+        ":file_utils",
+        "//coral:tflite_utils",
+        "//coral/classification:adapter",
+        "@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/flags:parse",
+        "@glog",
+        "@libedgetpu//tflite/public:oss_edgetpu_direct_all",  # buildcleaner: keep
+        "@org_tensorflow//tensorflow/lite:framework",
+        "@org_tensorflow//tensorflow/lite/c:common",
+    ],
+)
+
 cc_binary(
     name = "classify",
-    srcs = ["classify_image.h", "classify_image.cc"],
+    srcs = ["classify.h", "classify.cc"],
     linkshared = 1,
     deps = [
+        ":classify_cc",
         ":file_utils",
         "//coral:tflite_utils",
         "//coral/classification:adapter",
