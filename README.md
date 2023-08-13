@@ -99,3 +99,55 @@ build libclassify using
 ```
 make DOCKER_IMAGE=debian:buster DOCKER_CPUS="aarch64" DOCKER_TARGETS=examples docker-build
 ```
+
+### Use with C
+
+include the header file: https://github.com/ilagomatis/libcoral/blob/master/coral/examples/classify.h
+
+```
+/*main.c*/
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include"classify.h"
+int main(){
+	
+	char *model_path = (char*)malloc(100*sizeof(char));
+	strcpy(model_path, "mobilenet_v1_1.0_224_quant_edgetpu.tflite\0");
+	printf("model_path: %s\n", model_path);
+	
+	char *image_path = (char*)malloc(100*sizeof(char));
+	strcpy(image_path, "cat.rgb\0");
+	printf("image_path: %s\n", image_path);
+
+	char *labels_path = (char*)malloc(100*sizeof(char));
+	strcpy(labels_path, "imagenet_labels.txt\0");
+	printf("labels_path: %s\n", labels_path);
+
+	float input_mean = 128;
+	float input_std = 128;
+
+	char*  out = classify_image(model_path,
+			       	          image_path, 
+					  labels_path, 
+					  input_mean, 
+					  input_std);
+	
+	printf("%s", out);
+	free(model_path);
+	free(image_path);
+	free(labels_path);
+	free(out);
+	return 0;
+}
+
+```
+### Compile & Run
+
+place libclassify.so on the same directory as main.c
+```
+gcc main.c -L. -libclassify -o classify
+export LD_LIBRARY_PATH=.
+./classify
+```
