@@ -2,10 +2,12 @@
 /*
     File to be linked to C code, in order to use C++ functions
 */
+#ifndef __CLASSIFY_C_H__
+#define __CLASSIFY_C_H__
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif /* __cplusplus */
 
 char* classify_image(
                 char* model_path,
@@ -17,4 +19,6 @@ char* classify_image(
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
+
+#endif /* __CLASSIFY_C_H__ */
